@@ -17,6 +17,8 @@ mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true }, () => {
 // -----MIDDLEWARES
 
 // POST REQUEST PARSER
+let cors = require('cors');
+app.use(cors());
 app.use(express.json());
 app.use(helmet());
 app.use(morgan('common'));
@@ -26,6 +28,9 @@ app.use(function (req, res, next) {
   res.header(
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content-Type, Accept'
+  );
+  res.header(
+    'Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS'
   );
   next();
 });
